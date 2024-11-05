@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_presence_ft"
+                    "SELECT * FROM KTT_presence_md"
                 );
 
 
@@ -44,7 +44,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_presence_ft(date_jour,observation) 
+                    "INSERT INTO KTT_presence_md(date_jour,observation) 
                     VALUES(:date_jour,:observation)"
                 );
 
@@ -63,7 +63,7 @@
         {
             try{
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_ligne_presence_ft WHERE date_presence = :date_jour"
+                    "DELETE FROM KTT_ligne_presence_md WHERE date_presence = :date_jour"
                 );
 
                 $statement->bindParam(':date_jour',$presence_ft->date_jour);
@@ -71,7 +71,7 @@
                 $statement->execute();
 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_presence_ft WHERE date_jour = :date_jour"
+                    "DELETE FROM KTT_presence_md WHERE date_jour = :date_jour"
                 );
 
                 $statement->bindParam(':date_jour',$presence_ft->date_jour);

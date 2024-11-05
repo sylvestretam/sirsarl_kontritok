@@ -329,7 +329,7 @@ ALTER TABLE KTT_stock_sup ADD CONSTRAINT FK_KTT_stock_sup_article FOREIGN KEY (a
 
 DROP TRIGGER IF EXISTS KTT_LigneReceptionINSERTUpdateStockMagasin;
 DELIMITER |
-CREATE TRIGGER KTT_LigneReceptionINSERTUpdateStockMagasin AFTER INSERT
+CREATE TRIGGER KTT_LigneReceptionINSERTUpdateStockMagasin BEFORE INSERT
 ON KTT_ligne_reception_magasin FOR EACH ROW
 BEGIN
 
@@ -352,12 +352,11 @@ BEGIN
     DELETE FROM KTT_stock_magasin WHERE magasin = @m_magasin AND article = NEW.article AND unite = NEW.unite;
     
     INSERT INTO KTT_stock_magasin(quantite,valeur,article,unite,magasin)  VALUES( n_quantite, n_valeur, NEW.article, NEW.unite, @m_magasin);
-    
 END |
 
 DROP TRIGGER IF EXISTS KTT_LigneReceptionDELETEUpdateStockMagasin;
 DELIMITER |
-CREATE TRIGGER KTT_LigneReceptionDELETEUpdateStockMagasin AFTER DELETE
+CREATE TRIGGER KTT_LigneReceptionDELETEUpdateStockMagasin BEFORE DELETE
 ON KTT_ligne_reception_magasin FOR EACH ROW
 BEGIN
 
@@ -383,18 +382,20 @@ BEGIN
     SET n_quantite = m_quantite - OLD.quantite;
     SET n_valeur = m_valeur - OLD.valeur;
     
-	 
-    DELETE FROM KTT_stock_magasin WHERE magasin = @m_magasin AND article = m_article AND unite = m_unite;
-    
-    INSERT INTO KTT_stock_magasin(quantite,valeur,article,unite,magasin)  VALUES( n_quantite, n_valeur, m_article, m_unite, @m_magasin);
-    
+
+    IF n_quantite >= 0 THEN
+
+        DELETE FROM KTT_stock_magasin WHERE magasin = @m_magasin AND article = m_article AND unite = m_unite;
+
+        INSERT INTO KTT_stock_magasin(quantite,valeur,article,unite,magasin)  VALUES( n_quantite, n_valeur, m_article, m_unite, @m_magasin);
+    ELSE
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'STOCK INSUFFISSANT ...';
+    END IF;
 END |
-
-
 
 DROP TRIGGER IF EXISTS KTT_LigneSortieFTINSERTUpdateStockMagasin;
 DELIMITER |
-CREATE TRIGGER KTT_LigneSortieFTINSERTUpdateStockMagasin AFTER INSERT
+CREATE TRIGGER KTT_LigneSortieFTINSERTUpdateStockMagasin BEFORE INSERT
 ON KTT_ligne_sortie_sup FOR EACH ROW
 BEGIN
 
@@ -413,16 +414,20 @@ BEGIN
     SET n_quantite = m_quantite - NEW.quantite;
     SET n_valeur = m_valeur - NEW.valeur;
     
-	 
-    DELETE FROM KTT_stock_magasin WHERE magasin = @m_magasin AND article = NEW.article AND unite = NEW.unite;
+    IF n_quantite >= 0 THEN
+
+       DELETE FROM KTT_stock_magasin WHERE magasin = @m_magasin AND article = NEW.article AND unite = NEW.unite;
     
-    INSERT INTO KTT_stock_magasin(quantite,valeur,article,unite,magasin)  VALUES( n_quantite, n_valeur, NEW.article, NEW.unite, @m_magasin);
+       INSERT INTO KTT_stock_magasin(quantite,valeur,article,unite,magasin)  VALUES( n_quantite, n_valeur, NEW.article, NEW.unite, @m_magasin);
     
+    ELSE
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'STOCK INSUFFISSANT ...';
+    END IF;
 END |
 
 DROP TRIGGER IF EXISTS KTT_LigneSortieFTDELETEUpdateStockMagasin;
 DELIMITER |
-CREATE TRIGGER KTT_LigneSortieFTDELETEUpdateStockMagasin AFTER DELETE
+CREATE TRIGGER KTT_LigneSortieFTDELETEUpdateStockMagasin BEFORE DELETE
 ON KTT_ligne_sortie_sup FOR EACH ROW
 BEGIN
 
@@ -450,14 +455,12 @@ BEGIN
     DELETE FROM KTT_stock_magasin WHERE magasin = @m_magasin AND article = m_article AND unite = m_unite;
     
     INSERT INTO KTT_stock_magasin(quantite,valeur,article,unite,magasin)  VALUES( n_quantite, n_valeur, m_article, m_unite, @m_magasin);
-    
 END |
-
 
 
 DROP TRIGGER IF EXISTS KTT_LigneSortiePVINSERTUpdateStockMagasin;
 DELIMITER |
-CREATE TRIGGER KTT_LigneSortiePVINSERTUpdateStockMagasin AFTER INSERT
+CREATE TRIGGER KTT_LigneSortiePVINSERTUpdateStockMagasin BEFORE INSERT
 ON KTT_ligne_sortie_pv FOR EACH ROW
 BEGIN
 
@@ -475,15 +478,20 @@ BEGIN
     SET n_quantite = m_quantite - NEW.quantite;
     SET n_valeur = m_valeur - NEW.valeur;
     	 
-    DELETE FROM KTT_stock_magasin WHERE magasin = @m_magasin AND article = NEW.article AND unite = NEW.unite;
+    IF n_quantite >= 0 THEN
+
+       DELETE FROM KTT_stock_magasin WHERE magasin = @m_magasin AND article = NEW.article AND unite = NEW.unite;
     
-    INSERT INTO KTT_stock_magasin(quantite,valeur,article,unite,magasin)  VALUES( n_quantite, n_valeur, NEW.article, NEW.unite, @m_magasin);
+       INSERT INTO KTT_stock_magasin(quantite,valeur,article,unite,magasin)  VALUES( n_quantite, n_valeur, NEW.article, NEW.unite, @m_magasin);
     
+    ELSE
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'STOCK INSUFFISSANT ...';
+    END IF;
 END |
 
 DROP TRIGGER IF EXISTS KTT_LigneSortiePVDELETEUpdateStockMagasin;
 DELIMITER |
-CREATE TRIGGER KTT_LigneSortiePVDELETEUpdateStockMagasin AFTER DELETE
+CREATE TRIGGER KTT_LigneSortiePVDELETEUpdateStockMagasin BEFORE DELETE
 ON KTT_ligne_sortie_pv FOR EACH ROW
 BEGIN
 
@@ -511,14 +519,13 @@ BEGIN
     DELETE FROM KTT_stock_magasin WHERE magasin = @m_magasin AND article = m_article AND unite = m_unite;
     
     INSERT INTO KTT_stock_magasin(quantite,valeur,article,unite,magasin)  VALUES( n_quantite, n_valeur, m_article, m_unite, @m_magasin);
-    
 END |
 
 
 
 DROP TRIGGER IF EXISTS KTT_LigneRetourFTINSERTUpdateStockMagasin;
 DELIMITER |
-CREATE TRIGGER KTT_LigneRetourFTINSERTUpdateStockMagasin AFTER INSERT
+CREATE TRIGGER KTT_LigneRetourFTINSERTUpdateStockMagasin BEFORE INSERT
 ON KTT_ligne_retour_sup FOR EACH ROW
 BEGIN
 
@@ -541,12 +548,11 @@ BEGIN
     DELETE FROM KTT_stock_magasin WHERE magasin = @m_magasin AND article = NEW.article AND unite = NEW.unite;
     
     INSERT INTO KTT_stock_magasin(quantite,valeur,article,unite,magasin)  VALUES( n_quantite, n_valeur, NEW.article, NEW.unite, @m_magasin);
-    
 END |
 
 DROP TRIGGER IF EXISTS KTT_LigneRetourFTDELETEUpdateStockMagasin;
 DELIMITER |
-CREATE TRIGGER KTT_LigneRetourFTDELETEUpdateStockMagasin AFTER DELETE
+CREATE TRIGGER KTT_LigneRetourFTDELETEUpdateStockMagasin BEFORE DELETE
 ON KTT_ligne_retour_sup FOR EACH ROW
 BEGIN
 
@@ -574,14 +580,13 @@ BEGIN
     DELETE FROM KTT_stock_magasin WHERE magasin = @m_magasin AND article = m_article AND unite = m_unite;
     
     INSERT INTO KTT_stock_magasin(quantite,valeur,article,unite,magasin)  VALUES( n_quantite, n_valeur, m_article, m_unite, @m_magasin);
-    
 END |
 
 
 
 DROP TRIGGER IF EXISTS KTT_LigneRetourPVINSERTUpdateStockMagasin;
 DELIMITER |
-CREATE TRIGGER KTT_LigneRetourPVINSERTUpdateStockMagasin AFTER INSERT
+CREATE TRIGGER KTT_LigneRetourPVINSERTUpdateStockMagasin BEFORE INSERT
 ON KTT_ligne_retour_pv FOR EACH ROW
 BEGIN
 
@@ -602,12 +607,11 @@ BEGIN
     DELETE FROM KTT_stock_magasin WHERE magasin = @m_magasin AND article = NEW.article AND unite = NEW.unite;
     
     INSERT INTO KTT_stock_magasin(quantite,valeur,article,unite,magasin)  VALUES( n_quantite, n_valeur, NEW.article, NEW.unite, @m_magasin);
-    
 END |
 
 DROP TRIGGER IF EXISTS KTT_LigneRetourPVDELETEUpdateStockMagasin;
 DELIMITER |
-CREATE TRIGGER KTT_LigneRetourPVDELETEUpdateStockMagasin AFTER DELETE
+CREATE TRIGGER KTT_LigneRetourPVDELETEUpdateStockMagasin BEFORE DELETE
 ON KTT_ligne_retour_pv FOR EACH ROW
 BEGIN
 
@@ -635,5 +639,4 @@ BEGIN
     DELETE FROM KTT_stock_magasin WHERE magasin = @m_magasin AND article = m_article AND unite = m_unite;
     
     INSERT INTO KTT_stock_magasin(quantite,valeur,article,unite,magasin)  VALUES( n_quantite, n_valeur, m_article, m_unite, @m_magasin);
-    
 END |

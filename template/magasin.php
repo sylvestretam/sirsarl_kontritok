@@ -32,77 +32,77 @@
             <div class="card-header">
 
                 <div class="row">
-                <div class="col-md-3 animation__transright">
-                    <div class="info-box bg-info">
-                        <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+                    <div class="col-md-3 animation__transright">
+                        <div class="info-box bg-info">
+                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text"> RECEPTION </span>
-                            <span class="info-box-number"> <?= $TotalReception ?> </span>
+                            <div class="info-box-content">
+                                <span class="info-box-text"> RECEPTION </span>
+                                <span class="info-box-number"> <?= $TotalReception ?> </span>
 
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 00%"></div>
-                        </div>
-                        <span class="progress-description">
-                            BTL
-                        </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 animation__transright">
-                    <div class="info-box bg-secondary">
-                        <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text"> SORTIE </span>
-                            <span class="info-box-number"> <?= $TotalSortie = $TotalSortieFT + $TotalSortiePV ?> </span>
-
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 00%"></div>
-                        </div>
-                        <span class="progress-description">
-                            BTL
-                        </span>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 00%"></div>
+                            </div>
+                            <span class="progress-description">
+                                BTL
+                            </span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-md-3 animation__transright">
-                    <div class="info-box bg-success">
-                        <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+                    <div class="col-md-3 animation__transright">
+                        <div class="info-box bg-secondary">
+                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text"> RETOUR </span>
-                            <span class="info-box-number"> <?= $TotalRetour = $TotalRetourFT + $TotalRetourPV ?> </span>
+                            <div class="info-box-content">
+                                <span class="info-box-text"> SORTIE </span>
+                                <span class="info-box-number"> <?= $TotalSortie = $TotalSortieFT + $TotalSortiePV ?> </span>
 
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 00%"></div>
-                        </div>
-                        <span class="progress-description">
-                            BTL
-                        </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 animation__transright">
-                    <div class="info-box bg-dark">
-                        <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-                        <div class="info-box-content">
-                        <span class="info-box-text"> STOCK </span>
-                        <span class="info-box-number"> <?= $TotalReception - $TotalSortie + $TotalRetour ?> </span>
-
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 00%"></div>
-                        </div>
-                        <span class="progress-description">
-                            BTL
-                        </span>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 00%"></div>
+                            </div>
+                            <span class="progress-description">
+                                BTL
+                            </span>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="col-md-3 animation__transright">
+                        <div class="info-box bg-success">
+                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text"> RETOUR </span>
+                                <span class="info-box-number"> <?= $TotalRetour = $TotalRetourFT + $TotalRetourPV ?> </span>
+
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 00%"></div>
+                            </div>
+                            <span class="progress-description">
+                                BTL
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 animation__transright">
+                        <div class="info-box bg-dark">
+                            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+
+                            <div class="info-box-content">
+                            <span class="info-box-text"> STOCK </span>
+                            <span class="info-box-number"> <?= $TotalReception - $TotalSortie + $TotalRetour ?> </span>
+
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 00%"></div>
+                            </div>
+                            <span class="progress-description">
+                                BTL
+                            </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -169,19 +169,19 @@
                             <th> Unite </th>
                             <th> 
                                 Reception
-                                <button class="btn btn-sm btn-default" onclick="showReceptions('')">
+                                <button class="btn btn-sm btn-default <?= ShowIFPermit("KONTRITOK_MAG_RECEPTION") ?>" onclick="showReceptions('')">
                                     <i class="fas fa-search"></i>
                                 </button> 
                             </th>
                             <th> 
                                 Sortie 
-                                <button class="btn btn-sm btn-default" onclick="showSorties('')">
+                                <button class="btn btn-sm btn-default <?= ShowIFPermit("KONTRITOK_MAG_SORTIE") ?>" onclick="showSorties('')">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </th>
                             <th> 
                                 Retour 
-                                <button class="btn btn-sm btn-default" onclick="showRetours('')">
+                                <button class="btn btn-sm btn-default <?= ShowIFPermit("KONTRITOK_MAG_RETOUR") ?>" onclick="showRetours('')">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </th>
@@ -226,7 +226,7 @@
 
         <div class="card">
             <div class="card-header">
-                <button class="btn btn-dark btn-sm font-weight-bold" onclick="back('.sect_list_stock','.sect_list_magasin')"> <i class="fas fa-arrow-left"></i> RETOUR </button>
+                <button class="btn btn-dark btn-flat font-weight-bold" onclick="back('.sect_list_stock','.sect_list_magasin')"> <i class="fas fa-arrow-left"></i> RETOUR </button>
                 <span class="display-5 font-weight-bold center"> STOCK MAGASIN DISTRIBUTION </span>
             </div>
 
@@ -275,10 +275,10 @@
 
         <div class="card">
             <div class="card-header">
-                <button class="btn btn-dark btn-sm font-weight-bold" onclick="back('.sect_list_reception','.sect_list_magasin')"> <i class="fas fa-arrow-left"></i> RETOUR </button>
+                <button class="btn btn-dark btn-flat font-weight-bold" onclick="back('.sect_list_reception','.sect_list_magasin')"> <i class="fas fa-arrow-left"></i> RETOUR </button>
             
                 <div class="card-tools">
-                    <button class="btn btn-dark btn-sm font-weight-bold" onclick="back('.sect_list_reception','.sect_add_reception')"> <i class="fas fa-plus"></i> NOUVEAU </button>
+                    <button class="btn btn-dark btn-flat font-weight-bold <?= ShowIFPermit("KONTRITOK_MAG_RECEPTION_ADD") ?>" onclick="back('.sect_list_reception','.sect_add_reception')"> <i class="fas fa-plus"></i> NOUVEAU </button>
                 </div>
             </div>
 
@@ -330,7 +330,7 @@
 
           <div class="card">
             <div class="card-header">
-              <button type="button" class="btn btn-sm btn-dark font-weight-bold" onclick="back('.sect_add_reception','.sect_list_reception')">
+              <button type="button" class="btn btn-flat btn-dark font-weight-bold" onclick="back('.sect_add_reception','.sect_list_reception')">
                 <i class="fas fa-arrow-left"></i> RETOUR
               </button>
             </div>
@@ -348,7 +348,6 @@
                     </div>
 
                     <form action='./?action=magasin&subaction=saveReception' method='POST'>
-                      <!-- <input type="hidden" class="form-control magasin" name="magasin"> -->
                       <div class="card-body">
 
                         <div class="row">
@@ -476,7 +475,7 @@
 
           <div class="card card-tools">
             <div class="card-header">
-              <button type="button" class="btn btn-sm btn-dark font-weight-bold" onclick="back('.sect_mod_reception','.sect_list_reception')">
+              <button type="button" class="btn btn-flat btn-dark font-weight-bold" onclick="back('.sect_mod_reception','.sect_list_reception')">
                 <i class="fas fa-arrow-left"></i> RETOUR
               </button>
             </div>
@@ -490,7 +489,7 @@
                   <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">RECEPTION</h3>
-                        <div class="card-tools">
+                        <div class="card-tools <?= ShowIFPermit("KONTRITOK_MAG_RECEPTION_SUP") ?>">
                             <form action='./?action=magasin&subaction=deleteReception' method='POST'>
                                 <input type="hidden" class="form-control reception_id" name="reception_id">
                                 <button class="btn btn-dark btn-sm font-weight-bold"> <i class="fas fa-minus"></i> SUPPRIMER </button>
@@ -569,8 +568,9 @@
     <section class="content sect_list_sortie invisible">
 
       <div class="container-fluid">
+
         <div class="row py-4">
-            <button type="button" class="btn btn-sm btn-dark font-weight-bold" onclick="back('.sect_list_sortie','.sect_list_magasin')">
+            <button type="button" class="btn btn-flat btn-dark font-weight-bold" onclick="back('.sect_list_sortie','.sect_list_magasin')">
                 <i class="fas fa-arrow-left"></i> RETOUR
             </button>
         </div>
@@ -581,8 +581,8 @@
                 <div class="card card-dark">
                     <div class="card-header">
                         <h3 class="card-title">MAGASIN <i class="fas fa-arrow-right"></i> SUPERVISEUR </h3>
-                        <div class="card-tools">
-                            <button class="btn btn-secondary btn-sm font-weight-bold" onclick="back('.sect_list_sortie_ft','.sect_add_sortie_ft')"> 
+                        <div class="card-tools <?= ShowIFPermit("KONTRITOK_MAG_SORTIE_ADD") ?>">
+                            <button class="btn btn-secondary btn-flat font-weight-bold" onclick="back('.sect_list_sortie_ft','.sect_add_sortie_ft')"> 
                                 <i class="fas fa-plus"></i> AJOUTER 
                             </button>
                         </div>
@@ -595,9 +595,10 @@
                             <thead>
                                 <tr>
                                     <th> Date </th>
-                                    <th> Magasin </th>
-                                    <th> SUPERVISEUR </th>
-                                    <th> Quantite </th>
+                                    <!-- <th> Magasin </th> -->
+                                    <th> Superviseur </th>
+                                    <th> Qte </th>
+                                    <th> Valeur </th>
                                     <th> ... </th>
                                 </tr>
                             </thead>
@@ -608,10 +609,13 @@
                                 ?>
                                     <tr>
                                         <td> <?= $sortie->date_sortie ?> </td>
-                                        <td> <?= $sortie->magasin ?> </td>
+                                        <!-- <td> <?= $sortie->magasin ?> </td> -->
                                         <td> <?= $sortie->food_trucker ?> </td>
                                         <td> 
                                             <?= $sortie->quantite ?>
+                                        </td>
+                                        <td> 
+                                            <?= $sortie->valeur_total ?>
                                         </td>
                                         <td> 
                                             <button class="btn btn-sm btn-default" onclick="showSortieFT('<?= $sortie->sortie_id ?>')">
@@ -629,144 +633,10 @@
                 </div>  
             </div>
 
-            <!-- <div class="col-6 p-1 mx-auto animation__transtop invisible sect_add_sortie_ft">
-                <div class="card card-dark">
-                    <div class="card-header">
-                        <button type="button" class="btn btn-sm btn-secondary font-weight-bold" onclick="back('.sect_add_sortie_ft','.sect_list_sortie_ft')">
-                            <i class="fas fa-arrow-left"></i> RETOUR
-                        </button>
-                        <div class="card-tools">
-                            <h3 class="card-title"> MAGASIN <i class="fas fa-arrow-right"></i> SUPERVIEUR </h3>
-                        </div>
-                    </div>
-
-                        
-                    <form action='./?action=magasin&subaction=saveSortieFT' method='POST'>
-                        <input type="hidden" class="form-control magasin" name="magasin">
-                        <div class="card-body">
-
-                            <div class="row">
-                                <div class="form-group col-6">
-                                    <label for="codeprojet"> Date de Sortie </label>
-                                    <input type="date" class="form-control" name="date_sortie" required>
-                                </div>
-
-                                <div class="form-group col-6">
-                                    <label for=""> Magasin </label>
-                                    <select class="form-control" name="magasin">
-                                        <?php
-                                            foreach ($magasins as $magasin) {
-                                        ?>
-                                            <option value='<?= $magasin->code?>'> <?= $magasin->designation?> </option>
-                                        <?php
-                                            }
-                                        ?>
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-8 mx-auto">
-                                    <label for=""> Superviseur </label>
-                                    <select class="form-control select2" name="food_trucker">
-                                    <option disabled selected> Choississez Un Superviseur </option>
-                                    <?php
-                                    foreach ($superviseurs as $superviseur) {
-                                    ?>
-                                    <option value='<?= $superviseur->employee?>'> <?= $superviseur->noms ?> </option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                                </div>
-
-                            </div>
-
-                            <div class="row border m-1 p-1">
-
-                                <div class="col-12 text-center p-1">
-                                    <span class="font-weight-bold display-5"> ARTICLES </span>
-                                </div>
-
-                                <div class="form-group col-3">
-                                <label for="interet"> Article </label>
-                                <select class="form-control" id="articlesft">
-                                    <?php
-                                    foreach ($articles as $article) {
-                                    ?>
-                                        <option value='<?= $article->code?>'> <?= $article->designation?> </option>
-                                    <?php
-                                    }
-                                    ?>
-                                </select>
-                                </div>
-
-                                <div class="form-group col-3">
-                                <label for="quantitesft"> Quantite </label>
-                                <input type="number" min="1" class="form-control" id="quantitesft">
-                                </div>
-
-                                <div class="form-group col-3">
-                                <label for="interet"> Unité </label>
-                                <select class="form-control" id="unitesft">
-                                    <?php
-                                    foreach ($unites_stocks as $unite) {
-                                    ?>
-                                        <option value='<?= $unite->code_unite?>'> <?= $unite->designation?> </option>
-                                    <?php
-                                    }
-                                    ?>
-
-                                </select>
-                                </div>
-
-                                <div class="form-group col-3">
-                                    <label for="valeursft"> Valeur </label>
-                                    <input type="number" min="1" step="1" class="form-control" id="valeursft">
-                                </div>
-
-                                <div class="form-group col-4 mx-auto">
-                                    <span class="btn btn-dark btn-block font-weight-bold" onclick="addLigneSortieFT()"> AJOUTER <i class="fas fa-arrow-down"></i> </span>
-                                </div>
-
-                                <div class="form-group col-12">
-                                    <input type="text" class="form-control sortieft" disabled>
-                                    <input type="hidden" class="form-control sortieft" name="ligne_sortieft">
-                                </div>
-
-                                <table class="table table-bordered table-striped">
-
-                                    <thead>
-                                        <tr>
-                                            <th> Article </th>
-                                            <th> Quantite </th>
-                                            <th> Unité </th>
-                                            <th> Valeur </th>
-                                            <th> ... </th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody class='fts lignesortieft'>
-
-                                    </tbody>
-                                </table>
-
-                            </div>
-
-                        </div>
-
-                        <div class="card-footer text-center">
-                            <button type="submit" class="btn btn-dark font-weight-bold"> 
-                            <i class="fas fa-save"></i> ENREGISTRER
-                            </button>
-                        </div>
-
-                    </form>
-                </div>  
-            </div> -->
-
             <div class="col-6 p-1 mx-auto animation__transtop invisible sect_add_sortie_ft">
                 <div class="card card-dark">
                     <div class="card-header">
-                        <button type="button" class="btn btn-sm btn-secondary font-weight-bold" onclick="back('.sect_add_sortie_ft','.sect_list_sortie_ft')">
+                        <button type="button" class="btn btn-flat btn-secondary font-weight-bold" onclick="back('.sect_add_sortie_ft','.sect_list_sortie_ft')">
                             <i class="fas fa-arrow-left"></i> RETOUR
                         </button>
                         <div class="card-tools">
@@ -774,7 +644,7 @@
                         </div>
                     </div>
                         
-                    <form action='./?action=magasin&subaction=saveSortieFT' method='POST'>
+                    <form action='./?action=magasin&subaction=saveSortieMD' method='POST'>
                         <input type="hidden" class="form-control magasin" name="magasin">
                         <div class="card-body">
 
@@ -786,7 +656,7 @@
 
                                 <div class="form-group col-6">
                                     <label for=""> Magasin </label>
-                                    <select class="form-control" name="magasin">
+                                    <select class="form-control select2" name="magasin" required>
                                         <?php
                                             foreach ($magasins as $magasin) {
                                         ?>
@@ -799,8 +669,8 @@
 
                                 <div class="form-group col-8 mx-auto">
                                     <label for=""> Superviseur </label>
-                                    <select class="form-control select2" name="food_trucker">
-                                        <option disabled selected> Choississez Un Superviseur </option>
+                                    <select class="form-control select2" name="superviseur" required>
+                                        <!-- <option disabled selected> Choississez Un Superviseur </option> -->
                                         <?php
                                         foreach ($superviseurs as $superviseur) {
                                         ?>
@@ -899,13 +769,13 @@
             <div class="col-6 p-1 mx-auto animation__transtop invisible sect_mod_sortie_ft">
                 <div class="card card-dark">
                     <div class="card-header">
-                        <button type="button" class="btn btn-sm btn-secondary font-weight-bold" onclick="back('.sect_mod_sortie_ft','.sect_list_sortie_ft')">
+                        <button type="button" class="btn btn-flat btn-secondary font-weight-bold" onclick="back('.sect_mod_sortie_ft','.sect_list_sortie_ft')">
                             <i class="fas fa-arrow-left"></i> RETOUR
                         </button>
 
                         <span class="lead font-weight-bold center"> MAGASIN <i class="fas fa-arrow-right"></i> SUPERVIEUR </span>
 
-                        <div class="card-tools">
+                        <div class="card-tools <?= ShowIFPermit("KONTRITOK_MAG_SORTIE_SUP") ?>">
                             <form action='./?action=magasin&subaction=deleteSortieFT' method='POST'>
                                 <input type="hidden" class="form-control sortie_id" name="sortie_id">
                                 <button class="btn btn-secondary btn-sm font-weight-bold"> <i class="fas fa-minus"></i> SUPPRIMER </button>
@@ -967,8 +837,8 @@
                 
                     <div class="card-header">
                         <h3 class="card-title">MAGASIN <i class="fas fa-arrow-right"></i> POINTS DE VENTE</h3>
-                        <div class="card-tools">
-                            <button class="btn btn-dark btn-sm font-weight-bold" onclick="back('.sect_list_sortie_pv','.sect_add_sortie_pv')"> 
+                        <div class="card-tools <?= ShowIFPermit("KONTRITOK_MAG_SORTIE_ADD") ?>">
+                            <button class="btn btn-dark btn-flat font-weight-bold" onclick="back('.sect_list_sortie_pv','.sect_add_sortie_pv')"> 
                                 <i class="fas fa-plus"></i> AJOUTER 
                             </button>
                         </div>
@@ -981,8 +851,9 @@
                             <thead>
                                 <tr>
                                     <th> Date </th>
-                                    <th> magasin </th>
+                                    <!-- <th> magasin </th> -->
                                     <th> Point de Vente </th>
+                                    <th> Qte </th>
                                     <th> Valeur </th>
                                     <th> ... </th>
                                 </tr>
@@ -994,10 +865,13 @@
                                 ?>
                                     <tr>
                                         <td> <?= $sortie->date_sortie ?> </td>
-                                        <td> <?= $sortie->magasin ?> </td>
+                                        <!-- <td> <?= $sortie->magasin ?> </td> -->
                                         <td> <?= $sortie->point_de_vente ?> </td>
                                         <td> 
-                                            <?= $sortie->Total() ?>
+                                            <?= $sortie->quantite ?>
+                                        </td>
+                                        <td> 
+                                            <?= $sortie->valeur_total ?>
                                         </td>
                                         <td> 
                                             <button class="btn btn-sm btn-default" onclick="showSortiePV('<?= $sortie->sortie_id ?>')">
@@ -1018,7 +892,7 @@
             <div class="col-6 p-1 mx-auto animation__transtop invisible sect_add_sortie_pv">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <button type="button" class="btn btn-sm btn-dark font-weight-bold" onclick="back('.sect_add_sortie_pv','.sect_list_sortie_pv')">
+                        <button type="button" class="btn btn-flat btn-dark font-weight-bold" onclick="back('.sect_add_sortie_pv','.sect_list_sortie_pv')">
                             <i class="fas fa-arrow-left"></i> RETOUR
                         </button>
                         <div class="card-tools">
@@ -1028,7 +902,6 @@
 
                         
                     <form action='./?action=magasin&subaction=saveSortiePV' method='POST'>
-                        <!-- <input type="hidden" class="form-control magasin" name="magasin"> -->
                         <div class="card-body">
 
                             <div class="row">
@@ -1039,8 +912,7 @@
 
                                 <div class="form-group col-6">
                                     <label for=""> Magasin </label>
-                                    <!-- <input type="text" class="form-control magasin" disabled> -->
-                                    <select class="form-control" name="magasin">
+                                    <select class="form-control" name="magasin" required>
                                     <!-- <option disabled selected> Article </option> -->
                                     <?php
                                         foreach ($magasins as $magasin) {
@@ -1054,7 +926,7 @@
 
                                 <div class="form-group col-8 mx-auto">
                                     <label for=""> Point de Vente </label>
-                                    <select class="form-control" name="point_de_vente">
+                                    <select class="form-control" name="point_de_vente" required>
                                     <?php
                                     foreach ($pvs as $pv) {
                                     ?>
@@ -1152,13 +1024,13 @@
             <div class="col-6 p-1 mx-auto animation__transtop invisible sect_mod_sortie_pv">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <button type="button" class="btn btn-sm btn-dark font-weight-bold" onclick="back('.sect_mod_sortie_pv','.sect_list_sortie_pv')">
+                        <button type="button" class="btn btn-flat btn-dark font-weight-bold" onclick="back('.sect_mod_sortie_pv','.sect_list_sortie_pv')">
                             <i class="fas fa-arrow-left"></i> RETOUR
                         </button>
 
                         <span class="lead font-weight-bold center"> MAGASIN <i class="fas fa-arrow-right"></i> POINT DE VENTE</span>
 
-                        <div class="card-tools">
+                        <div class="card-tools <?= ShowIFPermit("KONTRITOK_MAG_SORTIE_SUP") ?>">
                             <form action='./?action=magasin&subaction=deleteSortiePV' method='POST'>
                                 <input type="hidden" class="form-control sortiepv_id" name="sortiepv_id">
                                 <button class="btn btn-dark btn-sm font-weight-bold"> <i class="fas fa-minus"></i> SUPPRIMER </button>
@@ -1235,7 +1107,7 @@
                 
                     <div class="card-header">
                         <h3 class="card-title">MAGASIN <i class="fas fa-arrow-left"></i> SUPERVISEUR </h3>
-                        <div class="card-tools">
+                        <div class="card-tools <?= ShowIFPermit("KONTRITOK_MAG_RETOUR_ADD") ?>">
                             <button class="btn btn-secondary btn-sm font-weight-bold" onclick="back('.sect_list_retour_ft','.sect_add_retour_ft')"> 
                                 <i class="fas fa-plus"></i> AJOUTER 
                             </button>
@@ -1249,9 +1121,10 @@
                             <thead>
                                 <tr>
                                     <th> Date </th>
-                                    <th> Magasin </th>
-                                    <th> SUPPERVISEUR </th>
-                                    <th> Quantite </th>
+                                    <!-- <th> Magasin </th> -->
+                                    <th> Superviseur </th>
+                                    <th> Qte </th>
+                                    <th> Valeur </th>
                                     <th> ... </th>
                                 </tr>
                             </thead>
@@ -1262,11 +1135,10 @@
                                 ?>
                                     <tr>
                                         <td> <?= $retour->date_retour ?> </td>
-                                        <td> <?= $retour->magasin ?> </td>
+                                        <!-- <td> <?= $retour->magasin ?> </td> -->
                                         <td> <?= $retour->food_trucker ?> </td>
-                                        <td> 
-                                            <?= $retour->quantite ?>
-                                        </td>
+                                        <td> <?= $retour->quantite ?> </td>
+                                        <td> <?= $retour->valeur_total ?> </td>
                                         <td> 
                                             <button class="btn btn-sm btn-default" onclick="showRetourFT('<?= $retour->retour_id ?>')">
                                                 <i class="fas fa-search"></i>
@@ -1307,7 +1179,7 @@
 
                                 <div class="form-group col-6">
                                     <label for=""> Magasin </label>
-                                    <select class="form-control" name="magasin">
+                                    <select class="form-control" name="magasin" required>
                                         <?php
                                             foreach ($magasins as $magasin) {
                                         ?>
@@ -1320,8 +1192,8 @@
 
                                 <div class="form-group col-8 mx-auto">
                                     <label for=""> SUPERVISEUR </label>
-                                    <select class="form-control select2" name="food_trucker">
-                                        <option disabled selected> Choississez Un Superviseur </option>
+                                    <select class="form-control select2" name="food_trucker" required>
+                                        <!-- <option disabled selected> Choississez Un Superviseur </option> -->
                                         <?php
                                         foreach ($superviseurs as $superviseur) {
                                         ?>
@@ -1427,7 +1299,7 @@
 
                         <span class="lead font-weight-bold center"> MAGASIN <i class="fas fa-arrow-right"></i> SUPERVISEUR </span>
 
-                        <div class="card-tools">
+                        <div class="card-tools <?= ShowIFPermit("KONTRITOK_MAG_RETOUR_SUP") ?>">
                             <form action='./?action=magasin&subaction=deleteRetourFT' method='POST'>
                                 <input type="hidden" class="form-control retour_idrft" name="retour_id">
                                 <button class="btn btn-secondary btn-sm font-weight-bold"> <i class="fas fa-minus"></i> SUPPRIMER </button>

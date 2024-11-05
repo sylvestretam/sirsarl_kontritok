@@ -5,14 +5,12 @@
     require_once('src/lib/database.php');
 
     require_once('src/controller/dashboard.php');
-    require_once('src/controller/prospection.php');
-    require_once('src/controller/activation.php');
     require_once('src/controller/magasin.php');
     require_once('src/controller/venteft.php');
     require_once('src/controller/ventepv.php');
     require_once('src/controller/grh.php');
 
-    if(isset($_SESSION['BTL']))
+    if(isset($_SESSION['KONTRITOK']))
     {
 
         if(isset($_REQUEST['action'])){
@@ -23,16 +21,6 @@
                     $dashboardcontroller = new DashboardController();
                     $dashboardcontroller->show();
                     break;
-
-                case 'prospection':
-                    $controller = new ProspectionController();
-                    $controller->show();
-                    break;
-                case 'activationpv':
-                    $controller = new ActivationController();
-                    $controller->show();
-                    break;
-
                 case 'magasin':
                     $controller = new MagasinController();
                     $controller->show();

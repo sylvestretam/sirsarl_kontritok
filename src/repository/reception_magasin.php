@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_reception_magasin"
+                    "SELECT * FROM KTT_reception_magasin"
                 );
 
 
@@ -46,7 +46,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_reception_magasin(reception_id,date_reception,magasin,uuid) 
+                    "INSERT INTO KTT_reception_magasin(reception_id,date_reception,magasin,uuid) 
                     VALUES(:reception_id,:date_reception,:magasin,:uuid)"
                 );
 
@@ -57,17 +57,17 @@
 
                 $statement->execute();
 
-                $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_reception_magasin WHERE uuid = :uuid"
-                );
+                // $statement = $this->dbconnect->getConection()->prepare(
+                //     "SELECT * FROM KTT_reception_magasin WHERE uuid = :uuid"
+                // );
 
-                $statement->bindParam(':uuid',$reception_magasin->uuid);
-                $statement->execute();
+                // $statement->bindParam(':uuid',$reception_magasin->uuid);
+                // $statement->execute();
 
-                if($row = $statement->fetch(PDO::FETCH_ASSOC))
-                {        
-                    $reception_magasin->reception_id = $row['reception_id'];
-                }
+                // if($row = $statement->fetch(PDO::FETCH_ASSOC))
+                // {        
+                //     $reception_magasin->reception_id = $row['reception_id'];
+                // }
                                                 
                 return $reception_magasin;
 
@@ -80,7 +80,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "UPDATE BTL_reception_magasin SET date_reception=:date_reception,magasin=:magasin 
+                    "UPDATE KTT_reception_magasin SET date_reception=:date_reception,magasin=:magasin 
                     WHERE reception_id=:reception_id"
                 );
 
@@ -101,13 +101,13 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_ligne_reception_magasin WHERE reception = :reception_id"
+                    "DELETE FROM KTT_ligne_reception_magasin WHERE reception = :reception_id"
                 );
                 $statement->bindParam(':reception_id',$reception_magasin->reception_id);
                 $statement->execute();
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_reception_magasin WHERE reception_id = :reception_id"
+                    "DELETE FROM KTT_reception_magasin WHERE reception_id = :reception_id"
                 );
                 $statement->bindParam(':reception_id',$reception_magasin->reception_id);
                 $statement->execute();

@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_ligne_sortie_pv"
+                    "SELECT * FROM KTT_ligne_sortie_pv"
                 );
 
 
@@ -47,7 +47,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_ligne_sortie_pv(sortie_pv,valeur,quantite,article,unite) 
+                    "INSERT INTO KTT_ligne_sortie_pv(sortie_pv,valeur,quantite,article,unite) 
                     VALUES(:sortie_pv,:valeur,:quantite,:article,:unite)"
                 );
 

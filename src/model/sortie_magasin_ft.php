@@ -19,6 +19,7 @@
                 if( $ligne->sortie_ft == $this->sortie_id){
                     $this->lignes_sorties[] = $ligne;
                     $this->quantite = $this->quantite + $ligne->quantite;
+                    $this->valeur_total = $this->valeur_total + $ligne->valeur;
                 }
             }
         }

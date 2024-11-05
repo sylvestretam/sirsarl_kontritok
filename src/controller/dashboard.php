@@ -1,5 +1,29 @@
 <?php
 
+    require_once("src/repository/magasin.php");
+    require_once("src/repository/article.php");
+    require_once("src/repository/unite_stock.php");
+    require_once("src/repository/market_develloper.php");
+    require_once("src/repository/superviseur.php");
+    require_once("src/repository/point_de_vente.php");
+
+    require_once("src/repository/reception_magasin.php");
+    require_once("src/repository/ligne_reception_magasin.php");
+
+    require_once("src/repository/sortie_magasin_ft.php");
+    require_once("src/repository/ligne_sortie_ft.php");
+    require_once("src/repository/retour_magasin_ft.php");
+    require_once("src/repository/ligne_retour_ft.php");
+
+    require_once("src/repository/sortie_magasin_pv.php");
+    require_once("src/repository/ligne_sortie_pv.php");
+    require_once("src/repository/retour_magasin_pv.php");
+    require_once("src/repository/ligne_retour_pv.php");
+
+    require_once("src/repository/stock_magasin.php");
+
+    require_once("src/repository/unite_article.php");
+
     class DashboardController{
 
         private $dbconnect;
@@ -43,7 +67,7 @@
             $this->repoMagasin = new MagasinRepository($this->dbconnect);
             $this->repoArticle = new ArticleRepository($this->dbconnect);
             $this->repoUnite = new Unite_stockRepository($this->dbconnect);
-            $this->repoFT = new Food_truckerRepository($this->dbconnect);
+            $this->repoFT = new MarketDevelloperRepository($this->dbconnect);
             $this->repoPV = new Point_de_venteRepository($this->dbconnect);
 
             $this->repoReception = new Reception_magasinRepository($this->dbconnect);

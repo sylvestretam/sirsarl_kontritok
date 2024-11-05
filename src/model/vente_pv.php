@@ -12,7 +12,7 @@
         public $point_vente;
 
         public $lignes = [];
-        public $quantite;
+        public $quantite = 0;
 
         public function setLignes($lignes)
         {

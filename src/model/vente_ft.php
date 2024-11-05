@@ -10,9 +10,10 @@
         public $status;
         public $status_by;
         public $food_trucker;
+        public $MD_name = "";
 
         public $lignes = [];
-        public $quantite;
+        public $quantite = 0;
 
         public function setLignes($lignes)
         {
@@ -24,4 +25,14 @@
                 }
             }
         }
+
+        public function setMDName($mds)
+        {
+            foreach ($mds as $md) {
+                if( $md->employee == $this->food_trucker){
+                    $this->MD_name = $md->noms;
+                }
+            }
+        }
+
     }

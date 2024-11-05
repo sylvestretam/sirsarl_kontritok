@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_sortie_magasin_pv"
+                    "SELECT * FROM KTT_sortie_magasin_pv"
                 );
 
 
@@ -49,7 +49,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_sortie_magasin_pv WHERE point_de_vente = :point_de_vente"
+                    "SELECT * FROM KTT_sortie_magasin_pv WHERE point_de_vente = :point_de_vente"
                 );
 
                 $statement->bindParam(':point_de_vente',$code_pv);
@@ -83,7 +83,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_sortie_magasin_pv(sortie_id,date_sortie,magasin,point_de_vente,observation,enreg_by,uuid) 
+                    "INSERT INTO KTT_sortie_magasin_pv(sortie_id,date_sortie,magasin,point_de_vente,observation,enreg_by,uuid) 
                     VALUES(:sortie_id,:date_sortie,:magasin,:point_de_vente,:observation,:enreg_by,:uuid)"
                 );
 
@@ -97,18 +97,18 @@
 
                 $statement->execute();
 
-                $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_sortie_magasin_pv WHERE uuid = :uuid"
-                );
+                // $statement = $this->dbconnect->getConection()->prepare(
+                //     "SELECT * FROM KTT_sortie_magasin_pv WHERE uuid = :uuid"
+                // );
 
-                $statement->bindParam(':uuid',$sortie_magasin_pv->uuid);
+                // $statement->bindParam(':uuid',$sortie_magasin_pv->uuid);
 
-                $statement->execute();
+                // $statement->execute();
 
-                if($row = $statement->fetch(PDO::FETCH_ASSOC))
-                {        
-                    $sortie_magasin_pv->sortie_id = $row['sortie_id'];
-                }
+                // if($row = $statement->fetch(PDO::FETCH_ASSOC))
+                // {        
+                //     $sortie_magasin_pv->sortie_id = $row['sortie_id'];
+                // }
                                 
                 return $sortie_magasin_pv;
 
@@ -121,7 +121,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "UPDATE BTL_sortie_magasin_pv SET magasin=:magasin,point_de_vente=:point_de_vente,observation=:observation,enreg_by=:enreg_by 
+                    "UPDATE KTT_sortie_magasin_pv SET magasin=:magasin,point_de_vente=:point_de_vente,observation=:observation,enreg_by=:enreg_by 
                     WHERE sortie_id,date_sortie"
                 );
 
@@ -145,13 +145,13 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_ligne_sortie_pv WHERE sortie_pv = :sortie_id"
+                    "DELETE FROM KTT_ligne_sortie_pv WHERE sortie_pv = :sortie_id"
                 );
                 $statement->bindParam(':sortie_id',$sortie_magasin_pv->sortie_id);
                 $statement->execute();
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_sortie_magasin_pv WHERE sortie_id = :sortie_id"
+                    "DELETE FROM KTT_sortie_magasin_pv WHERE sortie_id = :sortie_id"
                 );
                 $statement->bindParam(':sortie_id',$sortie_magasin_pv->sortie_id);
                 $statement->execute();

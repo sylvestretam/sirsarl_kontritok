@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_superviseur"
+                    "SELECT * FROM KTT_superviseur"
                 );
 
 

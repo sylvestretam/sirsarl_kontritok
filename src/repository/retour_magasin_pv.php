@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_retour_magasin_pv"
+                    "SELECT * FROM KTT_retour_magasin_pv"
                 );
 
 
@@ -49,8 +49,8 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_retour_magasin_pv(date_retour,magasin,point_de_vente,observation,enreg_by,uuid) 
-                    VALUES(:date_retour,:magasin,:point_de_vente,:observation,:enreg_by,:uuid)"
+                    "INSERT INTO KTT_retour_magasin_pv(date_retour,magasin,point_de_vente,observation,enreg_by,retour_id) 
+                    VALUES(:date_retour,:magasin,:point_de_vente,:observation,:enreg_by,:retour_id)"
                 );
 
                 $statement->bindParam(':date_retour',$retour_magasin_pv->date_retour);
@@ -58,12 +58,12 @@
                 $statement->bindParam(':point_de_vente',$retour_magasin_pv->point_de_vente);
                 $statement->bindParam(':observation',$retour_magasin_pv->observation);
                 $statement->bindParam(':enreg_by',$retour_magasin_pv->enreg_by);
-                $statement->bindParam(':uuid',$retour_magasin_pv->uuid);
+                $statement->bindParam(':retour_id',$retour_magasin_pv->retour_id);
 
                 $statement->execute();
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_retour_magasin_pv WHERE uuid = :uuid"
+                    "SELECT * FROM KTT_retour_magasin_pv WHERE uuid = :uuid"
                 );
 
                 $statement->bindParam(':uuid',$retour_magasin_pv->uuid);
@@ -86,7 +86,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "UPDATE BTL_retour_magasin_pv SET magasin=:magasin,point_de_vente=:point_de_vente,observation=:observation,enreg_by=:enreg_by 
+                    "UPDATE KTT_retour_magasin_pv SET magasin=:magasin,point_de_vente=:point_de_vente,observation=:observation,enreg_by=:enreg_by 
                     WHERE retour_id,date_retour"
                 );
 
@@ -110,13 +110,13 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_ligne_retour_pv WHERE retour_pv = :retour_id"
+                    "DELETE FROM KTT_ligne_retour_pv WHERE retour_pv = :retour_id"
                 );
                 $statement->bindParam(':retour_id',$retour_magasin_pv->retour_id);
                 $statement->execute();
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_retour_magasin_pv WHERE retour_id = :retour_id"
+                    "DELETE FROM KTT_retour_magasin_pv WHERE retour_id = :retour_id"
                 );
                 $statement->bindParam(':retour_id',$retour_magasin_pv->retour_id);
                 $statement->execute();

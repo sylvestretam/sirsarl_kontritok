@@ -20,6 +20,7 @@
                 if( $ligne->retour_ft == $this->retour_id){
                     $this->lignes_retours[] = $ligne;
                     $this->quantite = $this->quantite + $ligne->quantite;
+                    $this->valeur_total = $this->valeur_total + $ligne->valeur;
                 }
             }
         }

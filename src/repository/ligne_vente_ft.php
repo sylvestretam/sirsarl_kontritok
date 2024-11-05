@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_ligne_vente_ft"
+                    "SELECT * FROM KTT_ligne_vente_md"
                 );
 
 
@@ -27,7 +27,7 @@
                 while($row = $statement->fetch(PDO::FETCH_ASSOC))
                 {        
                     $ligne_vente_ft = new Ligne_vente_ft();
-                    $ligne_vente_ft->vente_ft = $row['vente_ft'];
+                    $ligne_vente_ft->vente_ft = $row['vente_md'];
                     $ligne_vente_ft->quantite = $row['quantite'];
                     $ligne_vente_ft->valeur = $row['valeur'];
                     $ligne_vente_ft->article = $row['article'];
@@ -47,7 +47,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_ligne_vente_ft(vente_ft,quantite,valeur,article,unite) 
+                    "INSERT INTO KTT_ligne_vente_md(vente_md,quantite,valeur,article,unite) 
                     VALUES(:vente_ft,:quantite,:valeur,:article,:unite)"
                 );
 

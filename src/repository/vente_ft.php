@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_vente_ft"
+                    "SELECT * FROM KTT_vente_md"
                 );
 
 
@@ -34,7 +34,7 @@
                     $vente_ft->enreg_by = $row['enreg_by'];
                     $vente_ft->status = $row['status'];
                     $vente_ft->status_by = $row['status_by'];
-                    $vente_ft->food_trucker = $row['food_trucker'];
+                    $vente_ft->food_trucker = $row['market_develloper'];
 
                     $vente_fts[] = $vente_ft;
                 }
@@ -50,7 +50,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_vente_ft WHERE food_trucker = :food_trucker"
+                    "SELECT * FROM KTT_vente_md WHERE food_trucker = :food_trucker"
                 );
 
                 $statement->bindParam(':food_trucker',$ft);
@@ -85,7 +85,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_vente_ft(vente_id,date_vente,food_trucker,enreg_by) 
+                    "INSERT INTO KTT_vente_md(vente_id,date_vente,market_develloper,enreg_by) 
                     VALUES(:vente_id,:date_vente,:food_trucker,:enreg_by)"
                 );
 
@@ -107,7 +107,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "UPDATE BTL_vente_ft SET date_vente=:date_vente,valeur_total=:valeur_total,observation=:observation,enreg_by=:enreg_by,status=:status,status_by=:status_by,food_trucker=:food_trucker 
+                    "UPDATE KTT_vente_md SET date_vente=:date_vente,valeur_total=:valeur_total,observation=:observation,enreg_by=:enreg_by,status=:status,status_by=:status_by,food_trucker=:food_trucker 
                     WHERE sortie_id,date_sortie"
                 );
 
@@ -135,13 +135,13 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_ligne_vente_ft WHERE vente_ft = :vente_id"
+                    "DELETE FROM KTT_ligne_vente_md WHERE vente_md = :vente_id"
                 );
                 $statement->bindParam(':vente_id',$vente_ft->vente_id);
                 $statement->execute();
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_vente_ft WHERE vente_id = :vente_id"
+                    "DELETE FROM KTT_vente_md WHERE vente_id = :vente_id"
                 );
                 $statement->bindParam(':vente_id',$vente_ft->vente_id);
                 $statement->execute();

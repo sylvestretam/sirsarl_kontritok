@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_ligne_sortie_ft"
+                    "SELECT * FROM KTT_ligne_sortie_sup"
                 );
 
 
@@ -27,7 +27,7 @@
                 while($row = $statement->fetch(PDO::FETCH_ASSOC))
                 {        
                     $ligne_sortie_ft = new Ligne_sortie_ft();
-                    $ligne_sortie_ft->sortie_ft = $row['sortie_ft'];
+                    $ligne_sortie_ft->sortie_ft = $row['sortie_sup'];
                     $ligne_sortie_ft->quantite = $row['quantite'];
                     $ligne_sortie_ft->valeur = $row['valeur'];
                     $ligne_sortie_ft->article = $row['article'];
@@ -47,7 +47,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_ligne_sortie_ft(sortie_ft,valeur,quantite,article,unite) 
+                    "INSERT INTO KTT_ligne_sortie_sup(sortie_sup,valeur,quantite,article,unite) 
                     VALUES(:sortie_ft,:valeur,:quantite,:article,:unite)"
                 );
 

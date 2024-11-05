@@ -1,9 +1,10 @@
 <?php
     require_once("src/repository/employee.php");
-    require_once("src/repository/food_trucker.php");
+    require_once("src/repository/market_develloper.php");
     require_once("src/repository/article.php");
     require_once("src/repository/unite_stock.php");
     require_once("src/repository/vente_ft.php");
+    require_once("src/repository/presence_ft.php");
     require_once("src/repository/ligne_vente_ft.php");
     require_once("src/repository/unite_article.php");
 
@@ -30,7 +31,7 @@
         {
             $this->dbconnect = new DbConnect();
 
-            $this->repoFood_trucker = new Food_truckerRepository($this->dbconnect);
+            $this->repoFood_trucker = new MarketDevelloperRepository($this->dbconnect);
             $this->repoVenteFT = new Vente_ftRepository($this->dbconnect);
             $this->repoLigne_venteFT = new Ligne_vente_ftRepository($this->dbconnect);
             $this->repoPresenceFT = new Presence_ftRepository($this->dbconnect);
@@ -51,8 +52,8 @@
 
             $TotalVente = array_reduce($this->ventesft,function($carry, $object){ return  $carry+($object->valeur_total);},0);
             $NbreVente = sizeof($this->ventesft);
-            $moyenne = (sizeof($this->ventesft) == 0 ) ? 0 : $TotalVente / $NbreVente;
-            $lastVente = (sizeof($this->ventesft) == 0 ) ? new Vente_ft() : $this->ventesft[ sizeof($this->ventesft)-1 ];
+            $moyenne = (sizeof($this->ventesft) == 0 ) ? 0 : $TotalVente / $NbreVente ;
+            $lastVente =  (sizeof($this->ventesft) == 0 ) ? new Vente_ft() : $this->ventesft[ sizeof($this->ventesft)-1 ];
 
             $articles = $this->repoArticle->getAll();
             $unites_stocks = $this->repoUnite->getAll(); 
@@ -70,15 +71,16 @@
 
             $this->ventesft = $this->repoVenteFT->getAll();
             $this->lignes_vente_ft = $this->repoLigne_venteFT->getAll();
-            $this->food_trucker = new Food_trucker();
-            if(!empty($_REQUEST['ft']))
-            {
-                $this->ventesft = $this->repoVenteFT->getVenteFT($_REQUEST['ft']);
-                $this->food_trucker =$this->repoFood_trucker->getOne($_REQUEST['ft']);
-            }
+
+            // $this->food_trucker = new MarketDevelloper();
+            // if(!empty($_REQUEST['ft']))
+            // {
+            //     $this->ventesft = $this->repoVenteFT->getVenteFT($_REQUEST['ft']);
+            //     $this->food_trucker =$this->repoFood_trucker->getOne($_REQUEST['ft']);
+            // }
 
             array_map(function($object){$object->setLignes($this->lignes_vente_ft);},$this->ventesft);
-            array_map(function($object){$object->setVentes($this->ventesft);},$this->food_truckers);
+            array_map(function($object){$object->setMDName($this->food_truckers);},$this->ventesft);
             
         }
 
@@ -105,8 +107,7 @@
             $vente = new Vente_ft();
             $vente->food_trucker = $_REQUEST['food_trucker'];
             $vente->date_vente = $_REQUEST['date_vente'];
-            // $vente->valeur_total = $_REQUEST['valeur_total'];
-            $vente->vente_id = uniqid('vft_');
+            $vente->vente_id = uniqid('Vmd_');
 
             $this->repoVenteFT->save($vente);
 

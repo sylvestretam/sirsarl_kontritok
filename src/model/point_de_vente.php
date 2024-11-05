@@ -24,7 +24,6 @@
 
         public function __construct()
         {
-            $this->Prospect = new Prospect();
         }
 
         public function setProspect($prospects)

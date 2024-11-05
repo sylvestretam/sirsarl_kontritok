@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_target_pv"
+                    "SELECT * FROM KTT_target_pv"
                 );
 
 
@@ -38,7 +38,7 @@
                 
                 return $target_pvs;
 
-            }catch(Exception $e){$GLOBALS['erro'] = $e->getMessage(); }
+            }catch(Exception $e){$GLOBALS['error'] = $e->getMessage(); }
 
         }
     }

@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <section class="content sect_list_ft invisible">
+    <section class="content sect_list_vente">
 
       <div class="container-fluid">
 
@@ -41,7 +41,7 @@
 
                       <div class="info-box-content">
                           <span class="info-box-text"> TOTAL </span>
-                          <span class="info-box-number"> <?= $TotalVente ?> </span>
+                          <span class="info-box-number"> <?= number_format( $TotalVente,0) ?> </span>
 
                       <div class="progress">
                           <div class="progress-bar" style="width: 00%"></div>
@@ -59,7 +59,7 @@
 
                       <div class="info-box-content">
                           <span class="info-box-text"> Nbre de Vente </span>
-                          <span class="info-box-number"> <?= $NbreVente ?> </span>
+                          <span class="info-box-number"> <?= number_format( $NbreVente,0) ?> </span>
 
                       <div class="progress">
                           <div class="progress-bar" style="width: 00%"></div>
@@ -77,7 +77,7 @@
 
                       <div class="info-box-content">
                           <span class="info-box-text"> MOYENNE VENTE </span>
-                          <span class="info-box-number"> <?= $moyenne ?> </span>
+                          <span class="info-box-number"> <?= number_format( $moyenne, 0) ?> </span>
 
                       <div class="progress">
                           <div class="progress-bar" style="width: 00%"></div>
@@ -101,7 +101,7 @@
                           <div class="progress-bar" style="width: 00%"></div>
                       </div>
                       <span class="progress-description">
-                        <?= $lastVente->valeur_total ?> 
+                        <?= number_format( $lastVente->valeur_total,0 ) ?> 
                       </span>
                       </div>
                   </div>
@@ -113,8 +113,8 @@
 
           <div class="card-body">
 
-            <div class="row text-rigth">
-              <button type="button" class="btn btn-md btn-dark btn-flat font-weight-bold" onclick="back('.sect_list_ft','.sect_add')">
+            <div class="row text-rigth <?= ShowIFPermit("KONTRITOK_VMD_ADD") ?>">
+              <button type="button" class="btn btn-md btn-dark btn-flat font-weight-bold" onclick="back('.sect_list_vente','.sect_add')">
                 <i class="fas fa-plus"></i> AJOUTER
               </button>
             </div>
@@ -123,45 +123,30 @@
 
                 <thead>
                     <tr>
-                        <th> MD </th>
-                        <th> Target(Qte) </th>
-                        <th> Réalisation(Qte) </th>
-                        <th> Réalisation(Valeur) </th>
-                        <th> Ecart </th>
+                        <th> Date </th>
+                        <th> MD matricule </th>
+                        <th> MD Noms </th>
+                        <th> Qte </th>
+                        <th> Valeur </th>
                         <th> ... </th>
                     </tr>
                 </thead>
 
                 <tbody class='fts'>
                     <?php
-                        foreach ($food_truckers as $food_trucker) {
+                        foreach ($ventesft as $vente) {
                     ?>
 
                     <tr>
-                        <td> 
-                          <?= $food_trucker->noms ?> 
-                        </td>
-
+                        <td> <?= $vente->date_vente ?> </td>
+                        <td> <?= $vente->food_trucker ?> </td>
+                        <td> <?= $vente->MD_name ?> </td>
+                        <td> <?= number_format( $vente->quantite,0) ?> </td>
+                        <td> <?= number_format( $vente->valeur_total,0) ?> </td>
                         <td>
-                          <?= $food_trucker->target_vente * sizeof($presences_fts) ?>
-                        </td>
-
-                        <td>
-                          <?= $food_trucker->quantite_vente ?>
-                        </td>
-
-                        <td>
-                          <?= $food_trucker->total_vente ?>
-                        </td>
-
-                        <td>
-                          <?= "..." ?>
-                        </td>
-
-                        <td>
-                            <a class="btn btn-sm btn-default" href="./?action=venteft&ft=<?=$food_trucker->employee?>">
-                            <i class="fas fa-search"></i>
-                            </a>  
+                          <button class="btn btn-sm btn-default" onclick="showVenteFT('<?= $vente->vente_id ?>')">
+                              <i class="fas fa-search"></i>
+                          </button>
                         </td>
                     </tr>
 
@@ -180,7 +165,7 @@
 
     </section>
 
-    <section class="content sect_list_vente invisible">
+    <section class="content sect_list_det_vente invisible">
 
         <div class="container-fluid">
 
@@ -335,7 +320,7 @@
                 <i class="fas fa-arrow-left"></i> RETOUR
               </button>
 
-              <div class="card-tools">
+              <div class="card-tools <?= ShowIFPermit("KONTRITOK_VMD_SUP") ?>">
                 <form action="./?action=venteft&subaction=deleteVente" method="POST">
                   <input type="hidden" class="form-control vente_id" name="vente_id">
                   <button type="submit" class="btn btn-sm btn-dark btn-flat font-weight-bold">
@@ -396,7 +381,7 @@
           <div class="card">
 
             <div class="card-header">
-              <button type="button" class="btn btn-sm btn-dark font-weight-bold" onclick="back('.sect_add','.sect_list_ft')">
+              <button type="button" class="btn btn-sm btn-dark btn-flat font-weight-bold" onclick="back('.sect_add','.sect_list_vente')">
                 <i class="fas fa-arrow-left"></i> RETOUR
               </button>
             </div>
@@ -424,7 +409,6 @@
                           <div class="form-group col-6">
                             <label for=""> MARKET DEVELLOPER </label>
                             <select class="form-control select2" style="width: 100%;" name="food_trucker" required>
-                              <option disabled selected> Choississez Un MARKET DEVELLOPER </option>
                               <?php
                                 foreach ($food_truckers as $ft) {
                               ?>
@@ -541,17 +525,3 @@
 </script>
 
 <?php require('template/import/foot.php'); ?>
-
-<script>
-  <?php
-    if(!empty($_REQUEST['ft'])){
-  ?>
-    $('.sect_list_vente').removeClass('invisible');
-  <?php
-    }else{
-  ?>
-    $('.sect_list_ft').removeClass('invisible');
-  <?php
-    }
-  ?>
-</script>

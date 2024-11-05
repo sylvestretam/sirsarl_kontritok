@@ -3,7 +3,7 @@
     require_once("src/repository/magasin.php");
     require_once("src/repository/article.php");
     require_once("src/repository/unite_stock.php");
-    require_once("src/repository/food_trucker.php");
+    require_once("src/repository/market_develloper.php");
     require_once("src/repository/superviseur.php");
     require_once("src/repository/point_de_vente.php");
 
@@ -70,7 +70,7 @@
             $this->repoMagasin = new MagasinRepository($this->dbconnect);
             $this->repoArticle = new ArticleRepository($this->dbconnect);
             $this->repoUnite = new Unite_stockRepository($this->dbconnect);
-            $this->repoFT = new Food_truckerRepository($this->dbconnect);
+            $this->repoFT = new MarketDevelloperRepository($this->dbconnect);
             $this->repoPV = new Point_de_venteRepository($this->dbconnect);
             $this->repoSuperviseur = new SuperviseurRepository($this->dbconnect);
 
@@ -183,8 +183,8 @@
                     case 'deleteReception':
                         $this->deleteReception();
                         break;
-                    case 'saveSortieFT':
-                        $this->saveSortieFT();
+                    case 'saveSortieMD':
+                        $this->saveSortieMD();
                         break;
                     case 'deleteSortieFT':
                         $this->deleteSortieFT();
@@ -218,7 +218,7 @@
             $reception = new Reception_magasin();
             $reception->date_reception = $_REQUEST['date_reception'];
             $reception->magasin = $_REQUEST['magasin'];
-            $reception->uuid = uniqid('rec_');
+            $reception->reception_id = uniqid('rec_');
 
             $reception = $this->repoReception->save($reception);
 
@@ -252,21 +252,21 @@
             $reception = $this->repoReception->delete($reception);
         }
 
-        public function saveSortieFT()
+        public function saveSortieMD()
         {
             $sortie = new Sortie_magasin_ft();
             $sortie->date_sortie = $_REQUEST['date_sortie'];
             $sortie->magasin = $_REQUEST['magasin'];
-            $sortie->food_trucker = $_REQUEST['food_trucker'];
+            $sortie->food_trucker = $_REQUEST['superviseur'];
             $sortie->enreg_by = $_SESSION['matricule'];
-            $sortie->uuid = uniqid('sft_');
+            $sortie->sortie_id = uniqid('Ssup_');
 
             $sortie = $this->repoSortieft->save($sortie);
 
-            $this->save_ligne_sortie_ft($sortie);
+            $this->save_ligne_sortie_md($sortie);
         }
 
-        public function save_ligne_sortie_ft($sortie)
+        public function save_ligne_sortie_md($sortie)
         {
             if(!empty( $_REQUEST['ligne_sortieft'] )){
                 $Lignes = json_decode($_REQUEST['ligne_sortieft']);
@@ -300,7 +300,7 @@
             $sortie->magasin = $_REQUEST['magasin'];
             $sortie->point_de_vente = $_REQUEST['point_de_vente'];
             $sortie->enreg_by = $_SESSION['matricule'];
-            $sortie->uuid = uniqid('spv_');
+            $sortie->sortie_id = uniqid('spv_');
 
             $sortie = $this->repoSortiepv->save($sortie);
 
@@ -341,12 +341,13 @@
             $retour->magasin = $_REQUEST['magasin'];
             $retour->food_trucker = $_REQUEST['food_trucker'];
             $retour->enreg_by = $_SESSION['matricule'];
-            $retour->uuid = uniqid('rft_');
+            $retour->retour_id = uniqid('Rft_');
 
             $retour = $this->repoRetourft->save($retour);
 
             $this->save_ligne_retour_ft($retour);
         }
+
         public function save_ligne_retour_ft($retour)
         {
             if(!empty( $_REQUEST['ligne_retourft'] )){
@@ -380,12 +381,13 @@
             $retour->magasin = $_REQUEST['magasin'];
             $retour->point_de_vente = $_REQUEST['point_de_vente'];
             $retour->enreg_by = $_SESSION['matricule'];
-            $retour->uuid = uniqid('rpv_');
+            $retour->retour_id = uniqid('Rpv_');
 
             $retour = $this->repoRetourpv->save($retour);
 
             $this->save_ligne_retour_pv($retour);
         }
+        
         public function save_ligne_retour_pv($retour)
         {
             if(!empty( $_REQUEST['ligne_retourpv'] )){

@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_magasin"
+                    "SELECT * FROM KTT_magasin"
                 );
 
 
@@ -36,7 +36,7 @@
                 
                 return $magasins;
 
-            }catch(Exception $e){$GLOBALS['erro'] = $e->getMessage(); }
+            }catch(Exception $e){$GLOBALS['error'] = $e->getMessage(); }
 
         }
 
@@ -45,7 +45,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_magasin(code,designation,localisation) 
+                    "INSERT INTO KTT_magasin(code,designation,localisation) 
                     VALUES(:code,:designation,:localisation)"
                 );
 
@@ -57,7 +57,7 @@
                                 
                 return $magasin;
 
-            }catch(Exception $e){$GLOBALS['erro'] = $e->getMessage(); }
+            }catch(Exception $e){$GLOBALS['error'] = $e->getMessage(); }
 
         }
 
@@ -66,7 +66,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "UPDATE BTL_magasin SET designation = :designation,description = :description 
+                    "UPDATE KTT_magasin SET designation = :designation,description = :description 
                     WHERE code = :code"
                 );
 
@@ -78,7 +78,7 @@
                                 
                 return $magasin;
 
-            }catch(Exception $e){$GLOBALS['erro'] = $e->getMessage(); }
+            }catch(Exception $e){$GLOBALS['error'] = $e->getMessage(); }
 
         }
 
@@ -87,7 +87,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_magasin WHERE code = :code"
+                    "DELETE FROM KTT_magasin WHERE code = :code"
                 );
 
                 $statement->bindParam(':code',$magasin->code);
@@ -96,7 +96,7 @@
                                 
                 return $magasin;
 
-            }catch(Exception $e){$GLOBALS['erro'] = $e->getMessage(); }
+            }catch(Exception $e){$GLOBALS['error'] = $e->getMessage(); }
 
         }
 

@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_unite_stock"
+                    "SELECT * FROM KTT_unite_stock"
                 );
 
 
@@ -36,7 +36,7 @@
                 
                 return $unite_stocks;
 
-            }catch(Exception $e){$GLOBALS['erro'] = $e->getMessage(); }
+            }catch(Exception $e){$GLOBALS['error'] = $e->getMessage(); }
 
         }
     }

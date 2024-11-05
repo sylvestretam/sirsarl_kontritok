@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_target_ft"
+                    "SELECT * FROM KTT_target_ft"
                 );
 
 
@@ -38,7 +38,7 @@
                 
                 return $target_fts;
 
-            }catch(Exception $e){$GLOBALS['erro'] = $e->getMessage(); }
+            }catch(Exception $e){$GLOBALS['error'] = $e->getMessage(); }
 
         }
     }

@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_vente_pv"
+                    "SELECT * FROM KTT_vente_pv"
                 );
 
 
@@ -50,7 +50,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_vente_pv WHERE point_vente = :point_vente"
+                    "SELECT * FROM KTT_vente_pv WHERE point_vente = :point_vente"
                 );
 
                 $statement->bindParam(':point_vente',$pv);
@@ -85,7 +85,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_vente_pv(vente_id,date_vente,point_vente,enreg_by) 
+                    "INSERT INTO KTT_vente_pv(vente_id,date_vente,point_vente,enreg_by) 
                     VALUES(:vente_id,:date_vente,:point_vente,:enreg_by)"
                 );
 
@@ -107,7 +107,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "UPDATE BTL_vente_pv SET date_vente=:date_vente,valeur_total=:valeur_total,observation=:observation,enreg_by=:enreg_by,status=:status,status_by=:status_by,point_vente=:point_vente 
+                    "UPDATE KTT_vente_pv SET date_vente=:date_vente,valeur_total=:valeur_total,observation=:observation,enreg_by=:enreg_by,status=:status,status_by=:status_by,point_vente=:point_vente 
                     WHERE vente_id = :vente_id"
                 );
 
@@ -135,13 +135,13 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_ligne_vente_pv WHERE vente_pv = :vente_id"
+                    "DELETE FROM KTT_ligne_vente_pv WHERE vente_pv = :vente_id"
                 );
                 $statement->bindParam(':vente_id',$vente_pv->vente_id);
                 $statement->execute();
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_vente_pv WHERE vente_id = :vente_id"
+                    "DELETE FROM KTT_vente_pv WHERE vente_id = :vente_id"
                 );
                 $statement->bindParam(':vente_id',$vente_pv->vente_id);
                 $statement->execute();

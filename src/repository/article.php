@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_article"
+                    "SELECT * FROM KTT_article"
                 );
 
 
@@ -36,7 +36,7 @@
                 
                 return $articles;
 
-            }catch(Exception $e){$GLOBALS['erro'] = $e->getMessage(); }
+            }catch(Exception $e){$GLOBALS['error'] = $e->getMessage(); }
 
         }
 
@@ -45,7 +45,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_article(code,designation,description) 
+                    "INSERT INTO KTT_article(code,designation,description) 
                     VALUES(:code,:designation,:description)"
                 );
 
@@ -57,7 +57,7 @@
                                 
                 return $article;
 
-            }catch(Exception $e){$GLOBALS['erro'] = $e->getMessage(); }
+            }catch(Exception $e){$GLOBALS['error'] = $e->getMessage(); }
 
         }
 
@@ -66,7 +66,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "UPDATE BTL_article SET designation = :designation,description = :description 
+                    "UPDATE KTT_article SET designation = :designation,description = :description 
                     WHERE code = :code"
                 );
 
@@ -78,7 +78,7 @@
                                 
                 return $article;
 
-            }catch(Exception $e){$GLOBALS['erro'] = $e->getMessage(); }
+            }catch(Exception $e){$GLOBALS['error'] = $e->getMessage(); }
 
         }
 
@@ -87,7 +87,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_article WHERE code = :code"
+                    "DELETE FROM KTT_article WHERE code = :code"
                 );
 
                 $statement->bindParam(':code',$article->code);
@@ -96,7 +96,7 @@
                                 
                 return $article;
 
-            }catch(Exception $e){$GLOBALS['erro'] = $e->getMessage(); }
+            }catch(Exception $e){$GLOBALS['error'] = $e->getMessage(); }
 
         }
 

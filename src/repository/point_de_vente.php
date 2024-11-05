@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_point_de_vente"
+                    "SELECT * FROM KTT_point_de_vente"
                 );
 
 
@@ -34,7 +34,6 @@
                     $point_de_vente->type = $row['type'];
                     $point_de_vente->status = $row['status'];
                     $point_de_vente->status_by = $row['status_by'];
-                    $point_de_vente->prospect = $row['prospect'];
 
                     $point_de_ventes[] = $point_de_vente;
                 }
@@ -50,7 +49,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_point_de_vente WHERE code_pv = :code_pv"
+                    "SELECT * FROM KTT_point_de_vente WHERE code_pv = :code_pv"
                 );
 
                 $statement->bindParam(':code_pv',$code);
@@ -68,7 +67,6 @@
                     $point_de_vente->type = $row['type'];
                     $point_de_vente->status = $row['status'];
                     $point_de_vente->status_by = $row['status_by'];
-                    $point_de_vente->prospect = $row['prospect'];
 
                     return $point_de_vente;
                 }
@@ -84,7 +82,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_point_de_vente(code_pv,nom,description,localisation,type,status,status_by,prospect) 
+                    "INSERT INTO KTT_point_de_vente(code_pv,nom,description,localisation,type,status,status_by,prospect) 
                     VALUES(:code_pv,:nom,:description,:localisation,:type,:status,:status_by,:prospect)"
                 );
 
@@ -95,7 +93,6 @@
                 $statement->bindParam(':type',$point_de_vente->type);
                 $statement->bindParam(':status',$point_de_vente->status);
                 $statement->bindParam(':status_by',$point_de_vente->status_by);
-                $statement->bindParam(':prospect',$point_de_vente->prospect);
 
                 $statement->execute();
                                 
@@ -110,7 +107,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "UPDATE BTL_point_de_vente SET designation=:designation,description=:description,localisation=:localisation, 
+                    "UPDATE KTT_point_de_vente SET designation=:designation,description=:description,localisation=:localisation, 
                     type=:type,status=:status,status_by=:status_by,prospect=:prospect  
                     WHERE code_pv = :code_pv"
                 );
@@ -137,7 +134,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_ligne_activation_pv WHERE activation_id IN( SELECT activation_id FROM BTL_activation_pv WHERE point_de_vente = :code_pv )"
+                    "DELETE FROM KTT_ligne_activation_pv WHERE activation_id IN( SELECT activation_id FROM KTT_activation_pv WHERE point_de_vente = :code_pv )"
                 );
 
                 $statement->bindParam(':code_pv',$point_de_vente->code_pv);
@@ -145,7 +142,7 @@
                 $statement->execute();
 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_activation_pv WHERE point_de_vente = :code_pv"
+                    "DELETE FROM KTT_activation_pv WHERE point_de_vente = :code_pv"
                 );
 
                 $statement->bindParam(':code_pv',$point_de_vente->code_pv);
@@ -153,7 +150,7 @@
                 $statement->execute();
 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_point_de_vente WHERE code_pv = :code_pv"
+                    "DELETE FROM KTT_point_de_vente WHERE code_pv = :code_pv"
                 );
 
                 $statement->bindParam(':code_pv',$point_de_vente->code_pv);

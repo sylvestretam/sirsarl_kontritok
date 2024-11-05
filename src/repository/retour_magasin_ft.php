@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_retour_magasin_ft"
+                    "SELECT * FROM KTT_retour_magasin_sup"
                 );
 
 
@@ -30,7 +30,7 @@
                     $retour_magasin_ft->retour_id = $row['retour_id'];
                     $retour_magasin_ft->date_retour = $row['date_retour'];
                     $retour_magasin_ft->magasin = $row['magasin'];
-                    $retour_magasin_ft->food_trucker = $row['food_trucker'];
+                    $retour_magasin_ft->food_trucker = $row['superviseur'];
                     $retour_magasin_ft->observation = $row['observation'];
                     $retour_magasin_ft->enreg_by = $row['enreg_by'];
                     $retour_magasin_ft->uuid = $row['uuid'];
@@ -49,8 +49,8 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_retour_magasin_ft(date_retour,magasin,food_trucker,observation,enreg_by,uuid) 
-                    VALUES(:date_retour,:magasin,:food_trucker,:observation,:enreg_by,:uuid)"
+                    "INSERT INTO KTT_retour_magasin_sup(date_retour,magasin,superviseur,observation,enreg_by,retour_id) 
+                    VALUES(:date_retour,:magasin,:food_trucker,:observation,:enreg_by,:retour_id)"
                 );
 
                 $statement->bindParam(':date_retour',$retour_magasin_ft->date_retour);
@@ -58,23 +58,23 @@
                 $statement->bindParam(':food_trucker',$retour_magasin_ft->food_trucker);
                 $statement->bindParam(':observation',$retour_magasin_ft->observation);
                 $statement->bindParam(':enreg_by',$retour_magasin_ft->enreg_by);
-                $statement->bindParam(':uuid',$retour_magasin_ft->uuid);
+                $statement->bindParam(':retour_id',$retour_magasin_ft->retour_id);
 
                 $statement->execute();
 
-                $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_retour_magasin_ft WHERE uuid = :uuid"
-                );
+                // $statement = $this->dbconnect->getConection()->prepare(
+                //     "SELECT * FROM KTT_retour_magasin_ft WHERE uuid = :uuid"
+                // );
 
-                $statement->bindParam(':uuid',$retour_magasin_ft->uuid);
+                // $statement->bindParam(':uuid',$retour_magasin_ft->uuid);
 
-                $statement->execute();
+                // $statement->execute();
                 
 
-                if($row = $statement->fetch(PDO::FETCH_ASSOC))
-                {        
-                    $retour_magasin_ft->retour_id = $row['retour_id'];
-                }
+                // if($row = $statement->fetch(PDO::FETCH_ASSOC))
+                // {        
+                //     $retour_magasin_ft->retour_id = $row['retour_id'];
+                // }
                                 
                 return $retour_magasin_ft;
 
@@ -87,7 +87,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "UPDATE BTL_retour_magasin_ft SET magasin=:magasin,food_trucker=:food_trucker,observation=:observation,enreg_by=:enreg_by 
+                    "UPDATE KTT_retour_magasin_sup SET magasin=:magasin,superviseur=:food_trucker,observation=:observation,enreg_by=:enreg_by 
                     WHERE retour_id,date_retour"
                 );
 
@@ -111,13 +111,13 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_ligne_retour_ft WHERE retour_ft = :retour_id"
+                    "DELETE FROM KTT_ligne_retour_sup WHERE retour_sup = :retour_id"
                 );
                 $statement->bindParam(':retour_id',$retour_magasin_ft->retour_id);
                 $statement->execute();
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_retour_magasin_ft WHERE retour_id = :retour_id"
+                    "DELETE FROM KTT_retour_magasin_sup WHERE retour_id = :retour_id"
                 );
                 $statement->bindParam(':retour_id',$retour_magasin_ft->retour_id);
                 $statement->execute();

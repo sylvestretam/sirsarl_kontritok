@@ -1,5 +1,5 @@
 <?php
-    require_once("src/repository/food_trucker.php");
+    require_once("src/repository/market_develloper.php");
     require_once("src/repository/article.php");
     require_once("src/repository/unite_stock.php");
     require_once("src/repository/vente_pv.php");
@@ -66,12 +66,7 @@
             $this->pvs = $this->repoPV->getAll();
             $this->ventespv = $this->repoVentePV->getAll();
             $this->lignes_ventespv = $this->repoLigne_ventePV->getAll();
-            $this->pv = new Point_de_vente();
-            if(!empty($_REQUEST['pv']))
-            {
-                $this->ventespv = $this->repoVentePV->getVentesPV($_REQUEST['pv']);
-                $this->pv =$this->repoPV->getOne($_REQUEST['pv']);
-            }
+            
 
             array_map(function($object){$object->setLignes($this->lignes_ventespv);},$this->ventespv);
             array_map(function($object){$object->setVentes($this->ventespv);},$this->pvs);
@@ -101,7 +96,6 @@
             $vente = new Vente_pv();
             $vente->point_vente = $_REQUEST['point_vente'];
             $vente->date_vente = $_REQUEST['date_vente'];
-            // $vente->valeur_total = $_REQUEST['valeur_total'];
             $vente->vente_id = uniqid('vpv_');
 
             $this->repoVentePV->save($vente);

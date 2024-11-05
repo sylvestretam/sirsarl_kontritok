@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_ligne_retour_ft"
+                    "SELECT * FROM KTT_ligne_retour_sup"
                 );
 
 
@@ -27,7 +27,7 @@
                 while($row = $statement->fetch(PDO::FETCH_ASSOC))
                 {        
                     $ligne_retour_ft = new Ligne_retour_ft();
-                    $ligne_retour_ft->retour_ft = $row['retour_ft'];
+                    $ligne_retour_ft->retour_ft = $row['retour_sup'];
                     $ligne_retour_ft->quantite = $row['quantite'];
                     $ligne_retour_ft->valeur = $row['valeur'];
                     $ligne_retour_ft->article = $row['article'];
@@ -47,7 +47,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_ligne_retour_ft(retour_ft,valeur,quantite,article,unite) 
+                    "INSERT INTO KTT_ligne_retour_sup(retour_sup,valeur,quantite,article,unite) 
                     VALUES(:retour_ft,:valeur,:quantite,:article,:unite)"
                 );
 
@@ -70,7 +70,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "DELETE FROM BTL_ligne_retour_ft WHERE article = :article AND unite = :unite AND retour_ft = :retour_ft"
+                    "DELETE FROM KTT_ligne_retour_sup WHERE article = :article AND unite = :unite AND retour_sup = :retour_ft"
                 );
 
                 $statement->bindParam(':unite',$ligne_commande_prospect->unite);

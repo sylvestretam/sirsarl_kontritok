@@ -16,7 +16,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "SELECT * FROM BTL_ligne_presence_ft"
+                    "SELECT * FROM KTT_ligne_presence_md"
                 );
 
 
@@ -28,7 +28,7 @@
                 {        
                     $ligne_presence_ft = new ligne_presence_ft();
                     $ligne_presence_ft->date_presence = $row['date_presence'];
-                    $ligne_presence_ft->food_trucker = $row['food_trucker'];
+                    $ligne_presence_ft->food_trucker = $row['market_develloper'];
                     $ligne_presence_ft->status = $row['status'];
 
                     $ligne_presence_fts[] = $ligne_presence_ft;
@@ -45,7 +45,7 @@
             try{
                 
                 $statement = $this->dbconnect->getConection()->prepare(
-                    "INSERT INTO BTL_ligne_presence_ft(date_presence,food_trucker,status) 
+                    "INSERT INTO KTT_ligne_presence_md(date_presence,market_develloper,status) 
                     VALUES(:date_presence,:food_trucker,:status)"
                 );
 

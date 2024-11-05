@@ -1,5 +1,7 @@
 <?php
 
+    require_once("src/repository/ligne_presence_ft.php");
+
     class GRHController{
 
         private $dbconnect;
@@ -15,7 +17,7 @@
         {
             $this->dbconnect = new DbConnect();
 
-            $this->repoFood_trucker = new Food_truckerRepository($this->dbconnect);
+            $this->repoFood_trucker = new MarketDevelloperRepository($this->dbconnect);
             $this->repoPresenceFT = new Presence_ftRepository($this->dbconnect);
             $this->repoLignePresenceFT = new Ligne_presence_ftRepository($this->dbconnect);
 

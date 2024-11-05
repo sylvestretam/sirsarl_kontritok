@@ -3,7 +3,7 @@
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title> BTL </title>  
+      <title> KONTRITOK </title>  
       <link rel="icon" href="template\dist\img\logosisas.jpg" sizes="32x32">
       <!-- Font Awesome -->
       <link rel="stylesheet" href="template/plugins/fontawesome-free/css/all.min.css">     

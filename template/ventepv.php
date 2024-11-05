@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <section class="content sect_list_ft invisible">
+    <section class="content sect_list_vente">
 
         <div class="container-fluid">
 
@@ -38,7 +38,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text"> TOTAL </span>
-                            <span class="info-box-number"> <?= $TotalVente ?> </span>
+                            <span class="info-box-number"> <?= number_format( $TotalVente,0) ?> </span>
 
                         <div class="progress">
                             <div class="progress-bar" style="width: 00%"></div>
@@ -56,7 +56,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text"> Nbre de Vente </span>
-                            <span class="info-box-number"> <?= $NbreVente ?> </span>
+                            <span class="info-box-number"> <?= number_format( $NbreVente,0 ) ?> </span>
 
                         <div class="progress">
                             <div class="progress-bar" style="width: 00%"></div>
@@ -74,7 +74,7 @@
 
                         <div class="info-box-content">
                           <span class="info-box-text"> MOYENNE VENTE </span>
-                          <span class="info-box-number"> <?= $moyenne ?> </span>
+                          <span class="info-box-number"> <?= number_format( $moyenne,0) ?> </span>
 
                           <div class="progress">
                               <div class="progress-bar" style="width: 00%"></div>
@@ -98,7 +98,7 @@
                             <div class="progress-bar" style="width: 00%"></div>
                         </div>
                         <span class="progress-description">
-                          <?= $lastVente->valeur_total ?> 
+                          <?= number_format( $lastVente->valeur_total,0) ?> 
                         </span>
                         </div>
                     </div>
@@ -110,8 +110,8 @@
 
             <div class="card-body">
 
-              <div class="row">
-                <button type="button" class="btn btn-md btn-dark btn-flat font-weight-bold" onclick="back('.sect_list_ft','.sect_add')">
+              <div class="row <?= ShowIFPermit("KONTRITOK_VPV_ADD") ?>">
+                <button type="button" class="btn btn-md btn-dark btn-flat font-weight-bold" onclick="back('.sect_list_vente','.sect_add')">
                   <i class="fas fa-plus"></i> AJOUTER
                 </button>
               </div>
@@ -120,37 +120,30 @@
 
                   <thead>
                       <tr>
-                          <th> POINT DE VENTE </th>
-                          <th> Réalisation(Qte) </th>
-                          <th> Réalisation(Valeur) </th>
+                          <th> Date </th>
+                          <th> Code PV </th>
+                          <th> Qte </th>
+                          <th> Valeur </th>
                           <th> ... </th>
                       </tr>
                   </thead>
 
                   <tbody class='fts'>
                       <?php
-                          foreach ($pvs as $pv) {
+                          foreach ($ventespv as $vente) {
                       ?>
 
-                      <tr>
-                          <td> 
-                            <?= $pv->nom ?> 
-                          </td>
-
-                          <td>
-                            <?= $pv->qte_ventes ?>
-                          </td>
-
-                          <td>
-                            <?= $pv->valeur_ventes ?>
-                          </td>
-
-                          <td>
-                              <a class="btn btn-sm btn-default" href="./?action=ventepv&pv=<?=$pv->code_pv?>">
-                              <i class="fas fa-search"></i>
-                              </a>  
-                          </td>
-                      </tr>
+                        <tr>
+                            <td> <?= $vente->date_vente ?> </td>
+                            <td> <?= $vente->point_vente ?> </td>
+                            <td> <?= number_format( $vente->quantite,0) ?> </td>
+                            <td> <?= number_format( $vente->valeur_total,0) ?> </td>
+                            <td> 
+                              <button class="btn btn-sm btn-default" onclick="showVentePV('<?= $vente->vente_id ?>')">
+                                <i class="fas fa-search"></i>
+                              </button>  
+                            </td>
+                        </tr>
 
                       <?php
                           }
@@ -166,145 +159,6 @@
 
     </section>
 
-    <section class="content sect_list_vente invisible">
-
-        <div class="container-fluid">
-
-          <div class="card">
-            <div class="card-header">
-
-              <div class="row">
-                <div class="col-md-3 animation__transright">
-                    <div class="info-box bg-info">
-                        <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text"> TOTAL </span>
-                            <span class="info-box-number"> <?= $TotalVente ?> </span>
-
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 00%"></div>
-                        </div>
-                        <span class="progress-description">
-                            BTL
-                        </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 animation__transright">
-                    <div class="info-box bg-secondary">
-                        <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text"> Nbre de Date </span>
-                            <span class="info-box-number"> <?= $NbreVente ?> </span>
-
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 00%"></div>
-                        </div>
-                        <span class="progress-description">
-                          BTL
-                        </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 animation__transright">
-                    <div class="info-box bg-success">
-                        <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text"> MOYENNE VENTE </span>
-                            <span class="info-box-number"> <?= $moyenne ?> </span>
-
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 00%"></div>
-                        </div>
-                        <span class="progress-description">
-                          BTL
-                        </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3 animation__transright">
-                    <div class="info-box bg-dark">
-                        <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
-
-                        <div class="info-box-content">
-                        <span class="info-box-text"> LAST VENTE </span>
-                        <span class="info-box-number"> <?= $lastVente->date_vente ?> </span>
-
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 00%"></div>
-                        </div>
-                        <span class="progress-description">
-                          <?= $lastVente->valeur_total ?> 
-                        </span>
-                        </div>
-                    </div>
-                </div>
-
-              </div>
-
-            </div>
-
-            <div class="card-body">
-
-              <div class="row">
-                <p class="h3"> <?= $sel_pv->nom ?> </p>
-              </div>
-
-              <table class="table table-bordered tableordered">
-                <thead>
-                    <tr>
-                        <th> Date </th>
-                        <th> Volume </th>
-                        <th> Valeur </th>
-                        <th> ... </th>
-                    </tr>
-                </thead>
-
-                <tbody class='fts'>
-                  <?php
-                        foreach ($ventespv as $vente) {
-                    ?>
-
-                    <tr>
-                        <td> 
-                          <?= $vente->date_vente ?> 
-                        </td>
-
-                        <td>
-                          <?= $vente->quantite ?>
-                        </td>
-
-                        <td>
-                          <?= $vente->valeur_total ?>
-                        </td>
-
-
-                        <td>
-                          <button class="btn btn-sm btn-default" onclick="showVentePV('<?= $vente->vente_id ?>')">
-                            <i class="fas fa-search"></i>
-                          </button>  
-                        </td>
-                    </tr>
-
-                    <?php
-                        }
-                    ?>
-                </tbody>
-              </table>
-
-            </div>
-          </div>
-
-        </div>
-        
-    </section>
-
     <section class="content sect_det_vente invisible">
 
         <div class="container-fluid">
@@ -315,7 +169,7 @@
                 <i class="fas fa-arrow-left"></i> RETOUR
               </button>
 
-              <div class="card-tools">
+              <div class="card-tools <?= ShowIFPermit("KONTRITOK_VMD_SUP") ?>">
                 <form action="./?action=ventepv&subaction=deleteVente" method="POST">
                   <input type="hidden" class="form-control vente_id" name="vente_id">
                   <button type="submit" class="btn btn-sm btn-dark font-weight-bold">
@@ -376,7 +230,7 @@
           <div class="card">
 
             <div class="card-header">
-              <button type="button" class="btn btn-sm btn-dark font-weight-bold" onclick="back('.sect_add','.sect_list_ft')">
+              <button type="button" class="btn btn-sm btn-dark font-weight-bold" onclick="back('.sect_add','.sect_list_vente')">
                 <i class="fas fa-arrow-left"></i> RETOUR
               </button>
             </div>
@@ -521,17 +375,3 @@
 </script>
 
 <?php require('template/import/foot.php'); ?>
-
-<script>
-  <?php
-    if(!empty($_REQUEST['pv'])){
-  ?>
-    $('.sect_list_vente').removeClass('invisible');
-  <?php
-    }else{
-  ?>
-    $('.sect_list_ft').removeClass('invisible');
-  <?php
-    }
-  ?>
-</script>
